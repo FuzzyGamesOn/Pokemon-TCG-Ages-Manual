@@ -42,7 +42,7 @@ class BannedCards(OptionList):
     """
     display_name = "Banned Cards"
 
-class LatePowerPokemon(Toggle):
+class LatePowerPokemon(DefaultOnToggle):
     """Forces all EX/ex/GX/V/whatever big body Pokemon to be placed in
     locations in the second half of the playthrough.
 
@@ -57,6 +57,7 @@ def before_options_defined(options: dict) -> dict:
     #   The only difference is when you define an option of the same name that Manual is defining.
     #   If that happens, when you add options here, you're allowing the Manual option to overwrite yours.
     return options
+
 
 # This is called after any manual options are defined, in case you want to see what options are defined or want to modify the defined options
 def after_options_defined(options: dict) -> dict:

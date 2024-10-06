@@ -59,6 +59,15 @@ By default, all packs are excluded except for the default one. There's a YAML op
 - `energy_list.csv` = A list of basic energy cards (shouldn't be necessary to fill in for anything except default)
 - `enemies.csv` = A list of enemies that you can potentially face
 
+## Can I Ban Cards from the Game?
+Yep! There's a YAML option for that. You just list out whatever cards you want banned, like:
+```
+banned_cards:
+   - Junk Arm TM 87
+   - Mewtwo EX NXD 54
+```
+You can't ban the pre-evolution cards provided, and you can't ban any of the basic energy cards. Only cards you can receive as an item.
+
 ## Okay, but I want to learn about hooks in Manual
 Check out [this document](hooks.md) that tells you all about how you might use hooks, and how they're used in this apworld!
 
