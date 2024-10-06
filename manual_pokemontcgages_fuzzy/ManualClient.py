@@ -17,6 +17,7 @@ if __name__ == "__main__":
 
 from NetUtils import ClientStatus
 from CommonClient import gui_enabled, logger, get_base_parser, ClientCommandProcessor, server_loop
+from MultiServer import mark_raw
 
 tracker_loaded = False
 try:
@@ -27,14 +28,34 @@ except ModuleNotFoundError:
     from CommonClient import CommonContext as SuperContext
 
 class ManualClientCommandProcessor(ClientCommandProcessor):
-    def _cmd_resync(self):
+    def _cmd_resync(self) -> bool:
         """Manually trigger a resync."""
-        self.output(f"Syncing items.")
+        self.output("Syncing items.")
         self.ctx.syncing = True
+        return True
+
+    @mark_raw
+    def _cmd_send(self, location_name: str) -> bool:
+        """Send a check"""
+        names = self.ctx.location_names_to_id.keys()
+        location_name, usable, response = Utils.get_intended_text(
+            location_name,
+            names
+        )
+        if usable:
+            location_id = self.ctx.location_names_to_id[location_name]
+            self.ctx.locations_checked.append(location_id)
+            self.ctx.syncing = True
+        else:
+            self.output(response)
+            return False
+
+
+
 
 
 class ManualContext(SuperContext):
-    command_processor: int = ManualClientCommandProcessor
+    command_processor = ManualClientCommandProcessor
     game = "not set"  # this is changed in server_auth below based on user input
     items_handling = 0b111  # full remote
     tags = {"AP"}
@@ -299,7 +320,7 @@ class ManualContext(SuperContext):
                     self.death_link_button = Button(text="Death Link: Primed",
                                                 size_hint_x=None, width=150)
                     self.connect_layout.add_widget(self.death_link_button)
-                    self.death_link_button.bind(on_press=self.send_death_link)
+                    self.death_link_button.bind(on_release=self.send_death_link)
 
             def send_death_link(self, *args):
                 if self.ctx.last_death_link:
@@ -437,7 +458,7 @@ class ManualContext(SuperContext):
 
                     for location_id in self.listed_locations[location_category]:
                         location_button = TreeViewButton(text=self.ctx.location_names.lookup_in_game(location_id), size_hint=(None, None), height=30, width=400)
-                        location_button.bind(on_press=lambda *args, loc_id=location_id: self.location_button_callback(loc_id, *args))
+                        location_button.bind(on_release=lambda *args, loc_id=location_id: self.location_button_callback(loc_id, *args))
                         location_button.id = location_id
                         category_layout.add_widget(location_button)
 
@@ -449,7 +470,7 @@ class ManualContext(SuperContext):
                         victory_text = "VICTORY! (seed finished)" if victory_location["name"] == "__Manual Game Complete__" else "GOAL: " + victory_location["name"]
                         location_button = TreeViewButton(text=victory_text, size_hint=(None, None), height=30, width=400)
                         location_button.victory = True
-                        location_button.bind(on_press=self.victory_button_callback)
+                        location_button.bind(on_release=self.victory_button_callback)
                         category_layout.add_widget(location_button)
 
                 tracker_panel_scrollable.add_widget(tracker_panel)

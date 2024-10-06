@@ -153,7 +153,6 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
     #   more random / depend on other things
     world.filler_item_name = "Ham Sandwich"
 
-
     # also, now that the usual starting items have been processed by Manual, 
     #   we say what starting items we want to start with,
     #   then we can loop over that and precollect them
@@ -437,17 +436,12 @@ def before_generate_basic(world: World, multiworld: MultiWorld, player: int) -> 
 
 # This method is run at the very end of pre-generation, once the place_item options have been handled and before AP generation occurs
 def after_generate_basic(world: World, multiworld: MultiWorld, player: int):
-    # pretend that the code in before_generate_basic is here instead.
-    #   ... and that's how you can use after_generate_basic.
-    # because they're basically the same :P
-    pass
+    # This hook occurs pretty late in generation, so we can do things that we'd want to use for hints/spoilers/etc. here
+    #   ... like determining what our enemy list is for this playthrough!
 
-
-# This is called before slot data is set and provides an empty dict ({}), in case you want to modify it before Manual does
-def before_fill_slot_data(slot_data: dict, world: World, multiworld: MultiWorld, player: int) -> dict:
     # we want to pick the list of enemies based on the packs that are included,
     #   then pass that list to our custom client
-    # so we'll add that list to slot data and retrieve it in the client that way
+    # so we'll add that list to the world (keyed to this player), then put that list in slot data for the client
 
     enabled_packs = world.options.packs.value
     # seed the enemy list with the enemies in default so, if other packs are missing HPs,
@@ -470,7 +464,19 @@ def before_fill_slot_data(slot_data: dict, world: World, multiworld: MultiWorld,
             for hp, cards in enemies.items()
     }
 
-    slot_data['enemies'] = json.dumps(enemy_choices)
+    if not hasattr(world, 'enemy_choices'):
+        world.enemy_choices = {}
+
+    world.enemy_choices[player] = enemy_choices
+
+
+# This is called before slot data is set and provides an empty dict ({}), in case you want to modify it before Manual does
+def before_fill_slot_data(slot_data: dict, world: World, multiworld: MultiWorld, player: int) -> dict:
+    # in the after_generate_basic hook above, we figure out what our enemy list is
+    #   so we can reuse it in multiple steps, like this one
+    # in this step, let's grab that list and put it in slot data so the client can retrieve it
+
+    slot_data['enemies'] = json.dumps(world.enemy_choices[player])
 
     return slot_data
     
@@ -504,3 +510,28 @@ def before_write_spoiler(world: World, multiworld: MultiWorld, spoiler_handle) -
 
     spoiler_handle.write("Oh my god... \n")
     spoiler_handle.write("What did you do to Pikachu?!\n")
+
+
+# This is called when you want to add entrance information to the hint text
+def before_extend_hint_information(hint_data: dict[int, dict[int, str]], world: World, multiworld: MultiWorld, player: int) -> None:
+    # pretend this is the same as the after_extend_hint_information method below
+    #   since they're interchangeable for hook usage
+    # just "before" lets Manual overwrite based on your JSON, "after" lets you overwrite what Manual finds in your JSON
+    
+    pass
+
+
+def after_extend_hint_information(hint_data: dict[int, dict[int, str]], world: World, multiworld: MultiWorld, player: int) -> None:  
+    if player not in hint_data:
+        hint_data.update({player: {}})
+
+    for location in multiworld.get_locations(player):
+        if not location.address or not location.parent_region:
+            continue
+    
+        hp_number_only = location.parent_region.name.replace(' HP', '')
+        hp_number_no_leading_zeroes = re.sub(r'^0', '', hp_number_only) # remove the leading zero, if one is present
+
+        hint_string = f'Defeat {world.enemy_choices[player][hp_number_no_leading_zeroes]}!'
+    
+        hint_data[player][location.address] = hint_string

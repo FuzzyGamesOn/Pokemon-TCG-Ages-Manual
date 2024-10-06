@@ -59,7 +59,7 @@ _Works in both of these but affects different things, so demonstrating both. `be
 _See [Forcing certain locations to have certain items based on options](#forcing-certain-locations-to-have-certain-items-based-on-options)._
 
 ### Write the player's starting items, etc. to slot data
-_Works in both of these with no changes, so I split my example between them. Also, this step is basically just "write stuff to slot data for the client"._
+_Works in both of these with no changes, so I picked before. You can pick either. Also, this step is basically just "write stuff to slot data for the client"._
 - [hooks/World.py](manual_pokemontcgages_fuzzy/hooks/World.py) -> `before_fill_slot_data`
 - [hooks/World.py](manual_pokemontcgages_fuzzy/hooks/World.py) -> `after_fill_slot_data`
 
@@ -80,6 +80,11 @@ _Works in both "before"/"after" with no changes, so I just put it in the "before
 _Also, there's very little worth doing at the "generate\_basic" step, since items/locations/regions should be set in stone by then._
 - [hooks/World.py](manual_pokemontcgages_fuzzy/hooks/World.py) -> `before_generate_basic`
 
+### Listing custom entrance data for hinted locations
+_Could be done in `before` or `after` hook. `before` lets Manual overwrite it with data from your JSON, `after` lets your hook have the final say._
+- [hooks/World.py](manual_pokemontcgages_fuzzy/hooks/World.py) -> `after_extend_hint_information`
+
 ## Modifying the Spoiler Log
 ### Writing custom information about the current playthrough
 - [hooks/World.py](manual_pokemontcgages_fuzzy/hooks/World.py) -> `before_write_spoiler`
+

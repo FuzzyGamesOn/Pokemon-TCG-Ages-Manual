@@ -51,7 +51,7 @@ def after_load_item_file(item_table: list) -> list:
         'Exodia the Flatulent One', 
         'Ham Sandwich', 
         'Chair For My Chair To Sit On',
-        'Chris Pratt, playing the part of Ash Ketchum',
+        'Chris Pratt starring as Ash Ketchum',
         'Play Two Energy and See If The Opponent Notices'
     ]
 
@@ -86,13 +86,14 @@ def after_load_location_file(location_table: list) -> list:
             if int(hp) == 0: # skip the cards that don't have HP at all (non-creature cards)
                 continue
 
+            padded_hp = str(hp).rjust(3, '0') # add fluff to left side of smaller hp categories so they sort better
             count = math.ceil(count / 2) # to have half for use in trials, rounded up
-
+            
             for x in range(count):
                 normal_trials.append({
                     'name': f'{hp} HP - Trial {x + 1}',
                     'region': f'{hp} HP',
-                    'category': [f'{hp} HP', 'Normal Trial', pack]
+                    'category': [f'{padded_hp} HP', 'Normal Trial', pack]
                     # could add requirements here, but just going to let the regions handle it    
                 }) # range starts at 0, so increment by 1
 
@@ -100,7 +101,7 @@ def after_load_location_file(location_table: list) -> list:
                 challenge_trials.append({
                     'name': f'{hp} HP - {htrial} Challenge',
                     'region': f'{hp} HP',
-                    'category': [f'{hp} HP', 'Challenge Trial', pack]
+                    'category': [f'{padded_hp} HP', 'Challenge Trial', pack]
                     # could add requirements here, but just going to let the regions handle it
                 })
 
@@ -111,7 +112,7 @@ def after_load_location_file(location_table: list) -> list:
     #   so the playthrough doesn't instantly beat the game
     location_table.append({
         'name': 'Did We Catch Them All?!',
-        'category': 'Victory', # this might actually be broken in Manual, but might as well try it
+        'category': ['** Victory **'], 
 
         # for the requires for victory, let's use the same rule functions we use below
         #   but with sufficient high percentages (like 90% or so)
@@ -182,13 +183,18 @@ def after_load_category_file(category_table: dict) -> dict:
     pack_categories = []
 
     # list the categories that we want to hide
-    categories_to_hide = ['Normal Trial', 'Handicap Trial']
-    # we also want to hide any set name categories on the cards themselves
+    categories_to_hide = ['Normal Trial', 'Challenge Trial']
     
     for pack in get_pack_names():
+        # we also want to hide any set name categories on the cards themselves
         card_categories.extend([
             card['Set Name'] for card in get_cards(pack)
         ])
+        # we ALSO want to hide any subcategories, like "Pokemon - Lightning" or "Supporter - Search"
+        card_categories.extend([
+            card['Card Type'] for card in get_cards(pack) if ' - ' in card['Card Type']
+        ])
+        # finally, let's hide pack names too
         pack_categories.append(pack)
 
     # we use a set to remove any duplicates...
