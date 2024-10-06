@@ -195,17 +195,17 @@ def get_itempool_total_by_category(world: World, category_name: str) -> int:
 #   but not going to use them for simplicity of examples.)
 ###
 
-def options_get_expansions(world: World) -> list:
-    return world.options['expansions'].value
+def options_get_packs(world: World) -> list:
+    return world.options.packs.value
 
-def options_get_starting_cards_per_expansion(world: World) -> int:
-    return world.options['starting_cards_per_expansion'].value
+def options_get_starting_pokemon_count(world: World) -> int:
+    return world.options.starting_pokemon_count.value
 
 def options_get_banned_cards(world: World) -> list:
-    return world.options['banned_cards'].value
+    return world.options.banned_cards.value
 
-def options_get_skip_intro(world: World) -> bool:
-    return world.options['skip_intro'].value
+def options_get_late_power_pokemon(world: World) -> bool:
+    return world.options.late_power_pokemon.value
 
 
 ###
