@@ -36,6 +36,12 @@ You open the Manual PokemonTCGAges Client from the AP Launcher in your Archipela
 ## Playing a Match
 You use the simulator at https://ptcgsim.online/ to play. _(There's a Dark Mode setting on the Settings page, unless you're a degenerate that enjoys Light Mode.)_
 
+**To pick a match to play:**
+- In the Manual PokemonTCGAges Client, make sure you're connected to the multiworld and click the "Manual" tab.
+- Pick the HP you'd like to face in an opponent, and expand that.
+- Locations that say "Trial #" are just basic win-and-done matches. Beat the opponent, and you can check that location off!
+- Locations that include the word "Challenge" will list what the challenge is. Play the match while obeying that challenge and, when you beat the opponent, check that location off!
+
 **To set up a match:**
 - Go the Import tab. Your deck will go in the "Main" tab, and the enemy's deck will go in the "Alt (1P Only)" tab.
 - In the Manual PokemonTCGAges Client, make sure you're connected to the multiworld and click the "Deck Builder" tab (the blue one).
