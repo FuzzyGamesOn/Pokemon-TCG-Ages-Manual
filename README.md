@@ -1,5 +1,5 @@
-# Pokemon TCG Ages Manual
-Pokemon TCG: Ages is a custom "game" that stemmed from a desire to experience card interactions and deckbuilding across different eras of the Pokemon Trading Card Game that hadn't been played or existed together. There are custom formats that allow deckbuilding across all eras, but they frequently focus on the most overpowered cards from each era. Instead, I wanted this custom game to encourage interactions between game mechanics and evolution lines/powers that would lead to some creative deckbuilding.
+# Pokemon TCG Ages (Manual)
+Pokemon TCG: Ages is a custom game that stemmed from a desire to experience card interactions and deckbuilding across different eras of the Pokemon Trading Card Game that hadn't been played or existed together. There are custom formats that allow deckbuilding across all eras, but they frequently focus on the most overpowered cards from each era. Instead, I wanted this custom game to encourage interactions between game mechanics and evolution lines/powers that would lead to some creative deckbuilding.
 
 The custom game centers around solitaire-style deck simulation, in that you'll build decks from the cards you've unlocked and your opponents will be static enemies for each "level". 
 
