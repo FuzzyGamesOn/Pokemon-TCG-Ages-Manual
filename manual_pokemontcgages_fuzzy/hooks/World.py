@@ -208,7 +208,7 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
             possible_items.remove(random_starting_item) # don't allow choosing the exact same item again
             item_pool.remove(random_starting_item) # remove it from the pool since we're starting with it
 
-    # once we're done, return our modified item pool
+    # once we're done with everything, return our modified item pool
     return item_pool
 
 

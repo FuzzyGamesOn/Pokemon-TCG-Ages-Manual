@@ -61,7 +61,7 @@ Sounds like you want to use requirement functions to either simplify your requir
 ## Whew. Okay. So, how does this world use hooks?
 The short answer is: It uses hooks for everything. My goal in making a world for demonstrating hooks was to completely avoid (for education purposes) the Manual templating JSON files entirely, and just use hooks and custom code to demonstrate some common use cases.
 
-But that's a discussion that's a bit too big to include here. So let's pop over to [the README in the hooks directory](manual_pokemontcgages_fuzzy/README.md) for more on that!
+But that's a discussion that's a bit too big to include here. So let's pop over to [the README in the hooks directory](manual_pokemontcgages_fuzzy/hooks/README.md) for more on that!
 
 ---
 ---

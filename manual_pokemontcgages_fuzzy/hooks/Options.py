@@ -46,7 +46,7 @@ class LatePowerPokemon(Toggle):
     """Forces all EX/ex/GX/V/whatever big body Pokemon to be placed in
     locations in the second half of the playthrough.
 
-    Note: This will likely make the playthrough significantly harder.
+    Note: This will likely make the playthrough harder / possibly more balanced than it normally would be.
     """
     display_name = "Late Power Pokemon"
 

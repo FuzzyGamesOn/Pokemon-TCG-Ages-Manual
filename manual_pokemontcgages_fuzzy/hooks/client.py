@@ -17,9 +17,7 @@ def get_context(args, config_file):
 class ManualPokemonTCGAgesContext(ManualContext):
     game = game_name # set the game name to change the Manual Game ID field
     
-    def run_gui(self):
-        super().run_gui()
-
+    def after_run_gui(self):
         # add a custom tab to the client named "Deck Builder"
         self.ui.logging_pairs.append(
             ("Deck Builder", "Deck Builder")
@@ -388,6 +386,7 @@ async def main(args):
 
     if gui_enabled:
         ctx.run_gui()
+        ctx.after_run_gui()
 
     ctx.run_cli()
 

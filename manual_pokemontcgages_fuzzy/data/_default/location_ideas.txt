@@ -1,7 +1,0 @@
-    /*
-    - No Trainers
-    - No Supporters
-    - Deathmatch - 1 v 30/30, etc.
-    - 1 of every card
-    - 
-    */

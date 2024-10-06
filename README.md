@@ -49,7 +49,7 @@ You use the simulator at https://ptcgsim.online/ to play. _(There's a Dark Mode 
 - Every time you take your turn, click the "+Turn" button to start your turn and have it draw a card for you.
 
 ## Can I Add More Cards to the Game?
-Yes! This apworld includes a `test` pack that demonstrates how to add another "expansion pack" of cards. To add another pack like the `test` one, just create a directory in data and name it whatever the pack name should be (no spaces, no funny characters).
+Yes! This apworld includes a `test` pack that demonstrates how to add another "expansion pack" of cards. To add another pack like the `test` one, just create a directory in data and name it whatever the pack name should be (no spaces, no funny characters), and make sure you add an entry to the `pack_list.csv` file in data for your new pack.
 
 By default, all packs are excluded except for the default one. There's a YAML option to include packs.
 
