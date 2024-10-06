@@ -15,7 +15,7 @@ from .hooks.Data import \
 # blatantly copied from the minecraft ap world because why not
 def load_data_file(*args) -> dict:
     fname = os.path.join("data", *args)
-
+    
     try:
         filedata = json.loads(pkgutil.get_data(__name__, fname).decode())
     except:

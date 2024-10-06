@@ -3,9 +3,11 @@
 import os
 import pkgutil
 import csv
+import re
 
 from io import StringIO
 
+from Utils import local_path
 from worlds.AutoWorld import World
 
 
@@ -16,10 +18,11 @@ from worlds.AutoWorld import World
 # we have to get the raw data from our CSV files to pass to a parser, so had to copy our own version of this method
 # this gets the contents of the file from pkgutil and passes it back as a "file" for csv parsing later
 def get_csv_file(*args) -> dict:
-    fname = os.path.join("../data", *args)
+    fname = os.path.join("data", *args)
+    package_base_name = re.sub(r'\.hooks\.\w+$', '.Data', __name__)
 
     try:
-        filedata = pkgutil.get_data(__name__, fname).decode()
+        filedata = pkgutil.get_data(package_base_name, fname).decode()
     except:
         filedata = ""
 
