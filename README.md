@@ -1,11 +1,13 @@
-# Pokemon TCG Ages (Manual)
-Pokemon TCG: Ages is a custom game that stemmed from a desire to experience card interactions and deckbuilding across different eras of the Pokemon Trading Card Game that hadn't been played or existed together. There are custom formats that allow deckbuilding across all eras, but they frequently focus on the most overpowered cards from each era. Instead, I wanted this custom game to encourage interactions between game mechanics and evolution lines/powers that would lead to some creative deckbuilding.
+# Pokemon TCG: Ages (Manual)
+**Legal bit:** Pokemon TCG: Ages is the name of a randomizer that uses a subset of Pokemon cards as a custom format to play the Pokemon TCG with. It is not a game, and is not endorsed by or affiliated with the Pokemon Company and related copyright holders.
 
-The custom game centers around solitaire-style deck simulation, in that you'll build decks from the cards you've unlocked and your opponents will be static enemies for each "level". 
+Pokemon TCG: Ages is a randomizer that stemmed from a desire to experience card interactions and deckbuilding across different eras of the Pokemon Trading Card Game that hadn't been played or existed together. There are custom formats that allow deckbuilding across all eras, but they frequently focus on the most overpowered cards from each era. Instead, I wanted this more balanced (and randomized) format to encourage interactions between game mechanics and evolution lines/powers that would lead to some creative deckbuilding.
 
-The game itself is built using an Archipelago apworld that was created with Manual for Archipelago, and operates as a randomized playthrough. For more information on Archipelago, go to [archipelago.gg](https://archipelago.gg/) or [join their Discord](https://discord.gg/archipelago). For more information on Manual for Archipelago, [join our Discord](https://discord.gg/T5bcsVHByx).
+Playing the randomizer requires solitaire-style deck simulation, in that you'll build decks from the cards you've unlocked and your opponents will be static enemies for each "level". 
 
-This game's apworld also demonstrates how you might want to use hooks in Manual. For more on that, see the heading below about hooks in Manual.
+The randomizer itself is built using an Archipelago apworld that was created with Manual for Archipelago, and operates much like the randomized playthrough of any game. For more information on Archipelago, go to [archipelago.gg](https://archipelago.gg/) or [join their Discord](https://discord.gg/archipelago). For more information on Manual for Archipelago, [join our Discord](https://discord.gg/T5bcsVHByx).
+
+This randomizer's apworld also demonstrates how you might want to use hooks in Manual. For more on that, see the heading below about hooks in Manual.
 
 ## Rules
 - First turn rules follow Black and White era rules (no restrictions). Specifically:
@@ -34,7 +36,7 @@ Grab the .apworld file from this repo's releases and put it in the `custom_world
 You open the Manual PokemonTCGAges Client from the AP Launcher in your Archipelago install.
 
 ## Playing a Match
-You use the simulator at https://ptcgsim.online/ to play. _(There's a Dark Mode setting on the Settings page, unless you're a degenerate that enjoys Light Mode.)_
+All you need to play is a way to play with the Pokemon cards that end up in your deck. That can be using physical cards, or making proxies, or some other way to simulate playing the Pokemon TCG. This randomizer is not specifically built for any of those methods, so that choice is up to you, the player!
 
 **To pick a match to play:**
 - In the Manual PokemonTCGAges Client, make sure you're connected to the multiworld and click the "Manual" tab.
@@ -43,18 +45,17 @@ You use the simulator at https://ptcgsim.online/ to play. _(There's a Dark Mode 
 - Locations that include the word "Challenge" will list what the challenge is. Play the match while obeying that challenge and, when you beat the opponent, check that location off!
 
 **To set up a match:**
-- Go the Import tab. Your deck will go in the "Main" tab, and the enemy's deck will go in the "Alt (1P Only)" tab.
 - In the Manual PokemonTCGAges Client, make sure you're connected to the multiworld and click the "Deck Builder" tab (the blue one).
 - Build your deck in the client above using the cards you've unlocked, the evolutions you have available, and basic energies.
-- Use the "Export to Clipboard" button above your decklist in the client.
-- Paste the copied decklist into the "Main" tab in the Import tab of the ptcgsim website, as mentioned above. Click the Import button, then click the Confirm button.
+- Use the "Export to Clipboard" button above your decklist in the client to get your complete decklist.
+- Use any of the methods above in "Playing a Match" to build your deck from the copied decklist in the previous step.
 - Back in the Manual PTCGA Client, in the Deck Builder tab, choose the enemy (in the dropdown) based on whichever HP is listed for the location you're doing next.
-- Click the "Copy Decklist" button in the client to copy your enemy's decklist.
-- Paste the copied enemy decklist into the "Alt (1P Only)" tab in the Import tab of the ptcgsim website, as mentioned above. Click the Import button, then click the Confirm button.
-- Go from the Import tab to the 1P tab on ptcgsim, and click the "Set Up Both" button at the bottom.
-- Every time you take your turn, click the "+Turn" button to start your turn and have it draw a card for you.
+- If you need a decklist for the enemy, you can get one by clicking "Copy Decklist".
+- If you just need to see the enemy for the purpose of referencing their HP, abilities/powers/etc., and attacks, click the "View Card" button.
+  - Since the enemy's deck is just 60 copies of itself, if you're playing with physical cards, I'd recommend just referencing the card instead of building the enemy deck.
+- That's it! Once you have your deck and your enemy squared away, complete the battle (including any challenge it might have).
 
-## Can I Add More Cards to the Game?
+## Can I Add More Cards to this Randomizer?
 Yes! This apworld includes a `test` pack that demonstrates how to add another "expansion pack" of cards. To add another pack like the `test` one, just create a directory in data and name it whatever the pack name should be (no spaces, no funny characters), and make sure you add an entry to the `pack_list.csv` file in data for your new pack.
 
 By default, all packs are excluded except for the default one. There's a YAML option to include packs.
@@ -65,7 +66,7 @@ By default, all packs are excluded except for the default one. There's a YAML op
 - `energy_list.csv` = A list of basic energy cards (shouldn't be necessary to fill in for anything except default)
 - `enemies.csv` = A list of enemies that you can potentially face
 
-## Can I Ban Cards from the Game?
+## Can I Ban Cards from this Randomizer?
 Yep! There's a YAML option for that. You just list out whatever cards you want banned, like:
 ```
 banned_cards:
