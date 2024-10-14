@@ -205,9 +205,9 @@ class ManualPokemonTCGAgesContext(ManualContext):
         received_cards_layout.add_widget(card_dropdown_label)
 
         unlocked_cards = [
-            self.item_names[network_item.item] for network_item in self.items_received
+            self.item_names.lookup_in_game(network_item.item) for network_item in self.items_received
         ]
-        
+
         received_card_picker = CardSelect(text="(None Selected)", size_hint=(None, None), size=(dp(250), dp(30)), sync_height=True,
             values=unlocked_cards, option_cls=CardSelectOption)
 
