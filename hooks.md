@@ -43,7 +43,7 @@ The custom thing that happens when the option is accounted for, however, would j
 Sounds like you want to change items in the item pool during generation, so you want World.py. The item pool is handled in the "create_items" step of generation. The likely hook you want is `before_create_items_filler` in World.py, so that you still let Manual properly add filler items at the end.
 
 ### "I want to dynamically change the requirements of a location or region."
-With regions and locations, there are two steps to keep in mind:
+With regions and locations, there are two generation steps to keep in mind:
 - "create_regions", which creates the regions and locations in the apworld based on your JSON data in those files
 - "set_rules", which modifies the created regions/locations to apply any requirements as access rules for those regions/locations
 
