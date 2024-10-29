@@ -43,7 +43,11 @@ The custom thing that happens when the option is accounted for, however, would j
 Sounds like you want to change items in the item pool during generation, so you want World.py. The item pool is handled in the "create_items" step of generation. The likely hook you want is `before_create_items_filler` in World.py, so that you still let Manual properly add filler items at the end.
 
 ### "I want to dynamically change the requirements of a location or region."
-Sounds like you want to change regions or their locations during generation, so you want World.py. The regions and their locations are handled in the "create_regions" step of generation. The hook you want is `after_create_regions` in World.py, so that you can take the AP regions and locations that were created from Manual's template JSONs and modify them.
+With regions and locations, there are two steps to keep in mind:
+- "create_regions", which creates the regions and locations in the apworld based on your JSON data in those files
+- "set_rules", which modifies the created regions/locations to apply any requirements as access rules for those regions/locations
+
+Since you want to change the requirements of a location or region, you want to focus on hooks in the "set_rules" step. Specifically, the hook you want is `after_set_rules` in World.py, so that you can overwrite or remove the rules for any location or region in your world.
 
 ### "I want to dynamically change my world's starting items."
 Sounds like you want to change items in the player's state and in the item pool during generation, so you want World.py. The item pool is handled in the "create_items" step of generation. Since you want to affect starting items, you'd have to do it right after the hook that comes before starting items... so you're likely looking at using the `before_create_items_filler` hook in World.py.
