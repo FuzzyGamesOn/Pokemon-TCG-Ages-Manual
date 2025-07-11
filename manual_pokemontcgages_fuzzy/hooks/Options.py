@@ -53,19 +53,12 @@ class LatePowerPokemon(DefaultOnToggle):
 
 # This is called before any manual options are defined, in case you want to define your own with a clean slate or let Manual define over them
 def before_options_defined(options: dict) -> dict:
-    # You can add your custom options either here or below.
-    #   The only difference is when you define an option of the same name that Manual is defining.
-    #   If that happens, when you add options here, you're allowing the Manual option to overwrite yours.
-    return options
+    # If you're wanting to add custom options, add them here. 
+    # Versions of Manual from 2025 on will no longer support adding them elsewhere.
+    #
+    # And make sure to name them in a unique way. Example: Don't have a 'goal' option; have a 'goal_orbs' option or something instead.
+    # (Otherwise, Manual will overwrite your 'goal' option with its core 'goal' option.)
 
-
-# This is called after any manual options are defined, in case you want to see what options are defined or want to modify the defined options
-def after_options_defined(options: dict) -> dict:
-    # Same note as above (in before_options_defined)
-    #   except in this case, you'd be overwriting any same-name options that Manual defined.
-    # Generally, this is probably better, but it's much better to just not have options of generic names.
-    #   Name your options specific to your game.
-    #   Example: Don't have a 'goal' option. Have a 'goal_orbs' option or something.
 
     # You don't have to use dict.update().
     # You can add them individually like:
@@ -77,7 +70,14 @@ def after_options_defined(options: dict) -> dict:
         'late_power_pokemon': LatePowerPokemon
     })
 
-    # Also, we have some category options that are defined when we create our categories,
+    return options
+
+
+# This is called after any manual options are defined, in case you want to see what options are defined or want to modify the defined options
+def after_options_defined(options: dict) -> dict:
+    # If you want to *modify* existing options -- whether your own or Manual's -- do that here.
+
+    # We have some category options that are defined when we create our categories,
     #   but we want to hide those in the spoiler / YAML. So let's do that here.
     for option in options.keys():
         if 'pack_remove_' in option:

@@ -28,8 +28,8 @@ _Reminder: These functions are not defined by Manual. You add these. (They also 
 - [hooks/World.py](World.py) -> `before_create_regions`
 
 ### Creating custom options
-_Could be done in `before` or `after` hook. There's no difference when you're adding options._
-- [hooks/Options.py](Options.py) -> `after_options_defined`
+_Only do this from the `before` hook. The `after` hook will no longer work for this._
+- [hooks/Options.py](Options.py) -> `before_options_defined`
 
 ### Hiding category options in the spoiler log / YAML template
 - [hooks/Options.py](Options.py) -> `after_options_defined`

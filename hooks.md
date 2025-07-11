@@ -35,9 +35,11 @@ I know that was a lot of info. For simplicity's sake, you will want to focus on 
 This depends on what you want to do. Let's talk through **some common scenarios** below and see where you might want to dig in with hooks. (In all cases, assume that the explanation ends with "and then you write custom code to accomplish this.")
 
 ### "I want to add a YAML option that will do something custom for my world."
-I'm not sure you need my help finding the place for this one. :) Either hook in Options.py works for this, and you'd put your option definition there too. I'd recommend using the `after_options_defined` hook in Options.py, though, so you have the option to both create your own options or customize Manual options.
+I'm not sure you need my help finding the place for this one. :) Open up the hooks file Options.py and look for the comment that says "add them here", then you'd put your option definition in there. In the `before_options_defined` hook method.
 
 The custom thing that happens when the option is accounted for, however, would just go wherever that functionality would go normally. As in, when it's not controlled by an option.
+
+(And if you're looking to customize existing options -- whether yours or Manual's -- use the `after_options_defined` hook.)
 
 ### "I want to change the quantity of an item or items dynamically, or split that item's classification between two classifications."
 Sounds like you want to change items in the item pool during generation, so you want World.py. The item pool is handled in the "create_items" step of generation. The likely hook you want is `before_create_items_filler` in World.py, so that you still let Manual properly add filler items at the end.
